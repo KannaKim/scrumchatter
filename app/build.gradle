@@ -1,17 +1,6 @@
 apply plugin: 'com.android.application'
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
-    }
-}
-
-apply plugin: 'com.github.ben-manes.versions'
-
 android {
+    namespace 'ca.rmen.android.scrumchatter'
     File signFile = rootProject.file('signing.properties')
     if (signFile.exists()) {
         Properties p = new Properties();
@@ -42,8 +31,8 @@ android {
         applicationId "ca.rmen.android.scrumchatter"
         versionCode 10606
         versionName "1.6.6"
-        minSdkVersion 14
-        targetSdkVersion 27
+        minSdkVersion 26
+        targetSdkVersion 33
         return true; // Avoid "Not all execution paths return a value"
     }
     buildTypes {
@@ -55,13 +44,14 @@ android {
     return true;
 }
 
+
 dependencies {
     implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
     implementation "com.android.support:appcompat-v7:${rootProject.supportLibVersion}"
     implementation "com.android.support:cardview-v7:${rootProject.supportLibVersion}"
     implementation "com.android.support:design:${rootProject.supportLibVersion}"
     implementation "com.android.support:preference-v7:${rootProject.supportLibVersion}"
-    implementation ('net.sourceforge.jexcelapi:jxl:2.6.12') {
+    implementation('net.sourceforge.jexcelapi:jxl:2.6.12') {
         exclude group: "log4j"
     }
     implementation "io.reactivex.rxjava2:rxjava:2.1.16"
@@ -70,15 +60,15 @@ dependencies {
 }
 
 // Only show real releases with the ben-manes plugin.
-dependencyUpdates.resolutionStrategy = {
-  componentSelection { rules ->
-    rules.all { ComponentSelection selection ->
-      boolean rejected = ['alpha', 'alpha-preview', 'beta', 'rc', 'cr', 'm'].any { qualifier ->
-        selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
-      }
-      if (rejected) {
-        selection.reject('Release candidate')
-      }
-    }
-  }
-}
+//dependencyUpdates.resolutionStrategy = {
+//  componentSelection { rules ->
+//    rules.all { ComponentSelection selection ->
+//      boolean rejected = ['alpha', 'alpha-preview', 'beta', 'rc', 'cr', 'm'].any { qualifier ->
+//        selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
+//      }
+//      if (rejected) {
+//        selection.reject('Release candidate')
+//      }
+//    }
+//  }
+//}

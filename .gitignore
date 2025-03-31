@@ -1,3 +1,5 @@
+!app/build.gradle
+!build.gradle
 app/build
 local.properties
 .gradle/

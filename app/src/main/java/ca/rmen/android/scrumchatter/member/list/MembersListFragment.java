@@ -177,21 +177,16 @@ public class MembersListFragment extends Fragment {
 
             // Depending on the header column selected, change the sort order
             // field and highlight that header column.
-            switch (view.getId()) {
-                case R.id.tv_name:
-                    mOrderByField = MemberColumns.NAME + " COLLATE NOCASE";
-                    mBinding.tvName.setTextColor(selectedHeaderColor);
-                    break;
-                case R.id.tv_avg_duration:
-                    mOrderByField = MemberStatsColumns.AVG_DURATION + " DESC, " + MemberColumns.NAME + " ASC ";
-                    mBinding.tvAvgDuration.setTextColor(selectedHeaderColor);
-                    break;
-                case R.id.tv_sum_duration:
-                    mOrderByField = MemberStatsColumns.SUM_DURATION + " DESC, " + MemberColumns.NAME + " ASC ";
-                    mBinding.tvSumDuration.setTextColor(selectedHeaderColor);
-                    break;
-                default:
-                    break;
+            int id = view.getId();
+            if (id == R.id.tv_name) {
+                mOrderByField = MemberColumns.NAME + " COLLATE NOCASE";
+                mBinding.tvName.setTextColor(selectedHeaderColor);
+            } else if (id == R.id.tv_avg_duration) {
+                mOrderByField = MemberStatsColumns.AVG_DURATION + " DESC, " + MemberColumns.NAME + " ASC ";
+                mBinding.tvAvgDuration.setTextColor(selectedHeaderColor);
+            } else if (id == R.id.tv_sum_duration) {
+                mOrderByField = MemberStatsColumns.SUM_DURATION + " DESC, " + MemberColumns.NAME + " ASC ";
+                mBinding.tvSumDuration.setTextColor(selectedHeaderColor);
             }
             // Re-query if needed.
             if (!oldOrderByField.equals(mOrderByField))

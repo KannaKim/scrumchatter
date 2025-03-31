@@ -258,39 +258,38 @@ public class MainActivity extends AppCompatActivity implements DialogButtonListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                if (mBinding.drawerLayout.isDrawerVisible(GravityCompat.START)) {
-                    mBinding.drawerLayout.closeDrawer(GravityCompat.START);
-                } else {
-                    mBinding.drawerLayout.openDrawer(GravityCompat.START);
-                }
-                return true;
-            case R.id.action_team_rename:
-                mTeams.promptRenameTeam(mTeam);
-                return true;
-            case R.id.action_team_delete:
-                mTeams.confirmDeleteTeam(mTeam);
-                return true;
-            case R.id.action_import:
-                startFileChooser();
-                return true;
-            case R.id.action_charts:
-                startActivity(new Intent(this, ChartsActivity.class));
-                return true;
-            case R.id.action_share:
-                // Build a chooser dialog for the file format.
-                DialogFragmentFactory.showChoiceDialog(this, getString(R.string.export_choice_title), getResources().getStringArray(R.array.export_choices),
-                        -1, R.id.action_share);
-                return true;
-            case R.id.action_settings:
-                Intent settingsIntent = new Intent(this, SettingsActivity.class);
-                startActivity(settingsIntent);
-                return true;
-            case R.id.action_about:
-                Intent aboutIntent = new Intent(this, AboutActivity.class);
-                startActivity(aboutIntent);
-                return true;
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            if (mBinding.drawerLayout.isDrawerVisible(GravityCompat.START)) {
+                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
+            } else {
+                mBinding.drawerLayout.openDrawer(GravityCompat.START);
+            }
+            return true;
+        } else if (itemId == R.id.action_team_rename) {
+            mTeams.promptRenameTeam(mTeam);
+            return true;
+        } else if (itemId == R.id.action_team_delete) {
+            mTeams.confirmDeleteTeam(mTeam);
+            return true;
+        } else if (itemId == R.id.action_import) {
+            startFileChooser();
+            return true;
+        } else if (itemId == R.id.action_charts) {
+            startActivity(new Intent(this, ChartsActivity.class));
+            return true;
+        } else if (itemId == R.id.action_share) {// Build a chooser dialog for the file format.
+            DialogFragmentFactory.showChoiceDialog(this, getString(R.string.export_choice_title), getResources().getStringArray(R.array.export_choices),
+                    -1, R.id.action_share);
+            return true;
+        } else if (itemId == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        } else if (itemId == R.id.action_about) {
+            Intent aboutIntent = new Intent(this, AboutActivity.class);
+            startActivity(aboutIntent);
+            return true;
         }
         super.onOptionsItemSelected(item);
         return false;
@@ -400,7 +399,7 @@ public class MainActivity extends AppCompatActivity implements DialogButtonListe
      *
      * @param actionId the action id which was provided to the {@link DialogFragmentFactory} when creating the dialog.
      * @param extras   any extras which were provided to the {@link DialogFragmentFactory} when creating the dialog.
-     * @see ca.rmen.android.scrumchatter.dialog.ConfirmDialogFragment.DialogButtonListener#onOkClicked(int, android.os.Bundle)
+     * @see DialogButtonListener#onOkClicked(int, Bundle)
      */
     @Override
     public void onOkClicked(int actionId, Bundle extras) {
@@ -444,7 +443,7 @@ public class MainActivity extends AppCompatActivity implements DialogButtonListe
      * @param actionId the action id which was provided to the {@link DialogFragmentFactory} when creating the dialog.
      * @param choices  the localized labels of the items.
      * @param which    the index of the item which was selected
-     * @see ca.rmen.android.scrumchatter.dialog.ChoiceDialogFragment.DialogItemListener#onItemSelected(int, java.lang.CharSequence[], int)
+     * @see DialogItemListener#onItemSelected(int, CharSequence[], int)
      */
     @Override
     public void onItemSelected(int actionId, CharSequence[] choices, int which) {
@@ -465,7 +464,7 @@ public class MainActivity extends AppCompatActivity implements DialogButtonListe
      * @param actionId the action id which was provided to the {@link DialogFragmentFactory} when creating the dialog.
      * @param input    the text entered by the user.
      * @param extras   any extras which were provided to the {@link DialogFragmentFactory} when creating the dialog.
-     * @see ca.rmen.android.scrumchatter.dialog.InputDialogFragment.DialogInputListener#onInputEntered(int, java.lang.String, android.os.Bundle)
+     * @see DialogInputListener#onInputEntered(int, String, Bundle)
      */
     @Override
     public void onInputEntered(int actionId, String input, Bundle extras) {

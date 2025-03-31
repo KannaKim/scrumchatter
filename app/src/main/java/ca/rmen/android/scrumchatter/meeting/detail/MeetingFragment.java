@@ -153,24 +153,22 @@ public class MeetingFragment extends Fragment {
             Log.w(TAG, "User clicked on a menu item while the activity is finishing.  Surely a monkey is involved");
             return true;
         }
-        switch (item.getItemId()) {
-        // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(getActivity());
-                return true;
-            case R.id.action_share_meeting:
-                mMeetings.export(mMeeting.getId());
-                return true;
-            case R.id.action_charts_meeting:
-                MeetingChartActivity.start(getContext(), mMeeting.getId());
-                return true;
-            case R.id.action_delete_meeting:
-                mMeetings.confirmDelete(mMeeting);
-                return true;
-            default:
-                super.onOptionsItemSelected(item);
-                return false;
+        int itemId = item.getItemId();// Respond to the action bar's Up/Home button
+        if (itemId == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(getActivity());
+            return true;
+        } else if (itemId == R.id.action_share_meeting) {
+            mMeetings.export(mMeeting.getId());
+            return true;
+        } else if (itemId == R.id.action_charts_meeting) {
+            MeetingChartActivity.start(getContext(), mMeeting.getId());
+            return true;
+        } else if (itemId == R.id.action_delete_meeting) {
+            mMeetings.confirmDelete(mMeeting);
+            return true;
         }
+        super.onOptionsItemSelected(item);
+        return false;
     }
 
 
